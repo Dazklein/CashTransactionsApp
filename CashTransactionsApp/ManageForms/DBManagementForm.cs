@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CashTransactionsApp.ManageForms
+namespace CashTransactionsApp
 {
-    public partial class deleteForm : Form
+    public partial class DBManagementForm : Form
     {
-        public deleteForm()
+        public DBManagementForm()
         {
             InitializeComponent();
         }

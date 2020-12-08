@@ -11,11 +11,6 @@ using System.Threading.Tasks;
 
 namespace CashTransactionsApp.Lib
 {
-    public class DataAccessHelper
-    {
-        
-    }
-
     public class DataAccess
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -144,7 +139,7 @@ namespace CashTransactionsApp.Lib
             {
                 employees = db.Query<Employee>("SELECT * FROM [Employee]").ToList();
             }
-            return employees;
+            return employees.ToList();
         }
 
         public Employee GetEmployee(int id)
@@ -171,7 +166,7 @@ namespace CashTransactionsApp.Lib
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                int id = db.Query<int>("EXEC CreateEmployee @Name, @Surname, @MiddleName, @PositionId", employee).FirstOrDefault();
+                int id = db.Query<int>("EXEC CreateEmployee @Name, @Surname, @Phone, @Email, @PositionId", employee).FirstOrDefault();
                 employee.EmployeeId = id;
             }
             return employee;
@@ -181,7 +176,7 @@ namespace CashTransactionsApp.Lib
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Execute("EXEC EditEmployee @Name, @Surname, @MiddleName, @PositionId", employee);
+                db.Execute("EXEC EditEmployee @Name, @Surname, @Phone, @Email, @PositionId, @EmployeeId", employee);
             }
         }
 
@@ -195,7 +190,7 @@ namespace CashTransactionsApp.Lib
         #endregion
 
         #region Database operations manager
-
+        
         #endregion
     }
 }

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace CashTransactionsApp
 {
-    public partial class mainForm : Form
+    public partial class cashOperationsForm : Form
     {
-        public mainForm()
+        public cashOperationsForm()
         {
             InitializeComponent();
-        }
-
-        private void mainForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
