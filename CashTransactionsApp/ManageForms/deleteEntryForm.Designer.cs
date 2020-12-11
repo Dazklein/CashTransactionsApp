@@ -64,6 +64,7 @@
             this.CnclButton.TabIndex = 2;
             this.CnclButton.Text = "Cancel";
             this.CnclButton.UseVisualStyleBackColor = true;
+            this.CnclButton.Click += new System.EventHandler(this.CnclButton_Click);
             // 
             // DeleteButton
             // 
@@ -74,6 +75,7 @@
             this.DeleteButton.TabIndex = 2;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // deleteEntryForm
             // 

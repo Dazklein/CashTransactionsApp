@@ -36,9 +36,7 @@
             this.DeleteButton = new System.Windows.Forms.Button();
             this.ShowPerfomanceButton = new System.Windows.Forms.Button();
             this.SelectedTableLabel = new System.Windows.Forms.Label();
-            this.HighPrftEmplButton = new System.Windows.Forms.Button();
             this.ShowPplSrvButton = new System.Windows.Forms.Button();
-            this.HighPrftSrvssButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.EntryDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +48,7 @@
             this.EmployeeSelectionButton.TabIndex = 0;
             this.EmployeeSelectionButton.Text = "Employee selection window";
             this.EmployeeSelectionButton.UseVisualStyleBackColor = true;
+            this.EmployeeSelectionButton.Click += new System.EventHandler(this.EmployeeSelectionButton_Click);
             // 
             // SelectTableComboBox
             // 
@@ -59,13 +58,27 @@
             this.SelectTableComboBox.Size = new System.Drawing.Size(168, 28);
             this.SelectTableComboBox.TabIndex = 2;
             this.SelectTableComboBox.Text = "Select a table..";
+            this.SelectTableComboBox.SelectedValueChanged += new System.EventHandler(this.SelectTableComboBox_SelectedValueChanged);
             // 
             // EntryDataGridView
             // 
+            this.EntryDataGridView.AllowUserToAddRows = false;
+            this.EntryDataGridView.AllowUserToDeleteRows = false;
+            this.EntryDataGridView.AllowUserToResizeColumns = false;
+            this.EntryDataGridView.AllowUserToResizeRows = false;
+            this.EntryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.EntryDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.EntryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EntryDataGridView.Location = new System.Drawing.Point(12, 56);
+            this.EntryDataGridView.MultiSelect = false;
             this.EntryDataGridView.Name = "EntryDataGridView";
-            this.EntryDataGridView.Size = new System.Drawing.Size(638, 310);
+            this.EntryDataGridView.ReadOnly = true;
+            this.EntryDataGridView.RowHeadersVisible = false;
+            this.EntryDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.EntryDataGridView.RowTemplate.ReadOnly = true;
+            this.EntryDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.EntryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.EntryDataGridView.Size = new System.Drawing.Size(638, 370);
             this.EntryDataGridView.TabIndex = 3;
             // 
             // AddButton
@@ -76,6 +89,7 @@
             this.AddButton.TabIndex = 4;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // EditButton
             // 
@@ -85,6 +99,7 @@
             this.EditButton.TabIndex = 4;
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // DeleteButton
             // 
@@ -94,15 +109,17 @@
             this.DeleteButton.TabIndex = 4;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // ShowPerfomanceButton
             // 
-            this.ShowPerfomanceButton.Location = new System.Drawing.Point(656, 212);
+            this.ShowPerfomanceButton.Location = new System.Drawing.Point(656, 272);
             this.ShowPerfomanceButton.Name = "ShowPerfomanceButton";
             this.ShowPerfomanceButton.Size = new System.Drawing.Size(129, 74);
             this.ShowPerfomanceButton.TabIndex = 5;
             this.ShowPerfomanceButton.Text = "Show employee performance";
             this.ShowPerfomanceButton.UseVisualStyleBackColor = true;
+            this.ShowPerfomanceButton.Click += new System.EventHandler(this.ShowPerfomanceButton_Click);
             // 
             // SelectedTableLabel
             // 
@@ -113,40 +130,21 @@
             this.SelectedTableLabel.TabIndex = 6;
             this.SelectedTableLabel.Text = "..Selected Table..";
             // 
-            // HighPrftEmplButton
-            // 
-            this.HighPrftEmplButton.Location = new System.Drawing.Point(13, 373);
-            this.HighPrftEmplButton.Name = "HighPrftEmplButton";
-            this.HighPrftEmplButton.Size = new System.Drawing.Size(151, 48);
-            this.HighPrftEmplButton.TabIndex = 7;
-            this.HighPrftEmplButton.Text = "Highest profit among employees";
-            this.HighPrftEmplButton.UseVisualStyleBackColor = true;
-            // 
             // ShowPplSrvButton
             // 
-            this.ShowPplSrvButton.Location = new System.Drawing.Point(656, 292);
+            this.ShowPplSrvButton.Location = new System.Drawing.Point(656, 352);
             this.ShowPplSrvButton.Name = "ShowPplSrvButton";
             this.ShowPplSrvButton.Size = new System.Drawing.Size(129, 74);
             this.ShowPplSrvButton.TabIndex = 5;
             this.ShowPplSrvButton.Text = "Most popular services";
             this.ShowPplSrvButton.UseVisualStyleBackColor = true;
-            // 
-            // HighPrftSrvssButton
-            // 
-            this.HighPrftSrvssButton.Location = new System.Drawing.Point(170, 373);
-            this.HighPrftSrvssButton.Name = "HighPrftSrvssButton";
-            this.HighPrftSrvssButton.Size = new System.Drawing.Size(151, 48);
-            this.HighPrftSrvssButton.TabIndex = 7;
-            this.HighPrftSrvssButton.Text = "Highest profit among services";
-            this.HighPrftSrvssButton.UseVisualStyleBackColor = true;
+            this.ShowPplSrvButton.Click += new System.EventHandler(this.ShowPplSrvButton_Click);
             // 
             // DBManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 430);
-            this.Controls.Add(this.HighPrftSrvssButton);
-            this.Controls.Add(this.HighPrftEmplButton);
+            this.ClientSize = new System.Drawing.Size(797, 438);
             this.Controls.Add(this.SelectedTableLabel);
             this.Controls.Add(this.ShowPplSrvButton);
             this.Controls.Add(this.ShowPerfomanceButton);
@@ -160,6 +158,9 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DBManagementForm";
             this.Text = "Database manager";
+            this.Activated += new System.EventHandler(this.DBManagementForm_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DBManagementForm_FormClosed);
+            this.Load += new System.EventHandler(this.DBManagementForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.EntryDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -176,8 +177,6 @@
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button ShowPerfomanceButton;
         private System.Windows.Forms.Label SelectedTableLabel;
-        private System.Windows.Forms.Button HighPrftEmplButton;
         private System.Windows.Forms.Button ShowPplSrvButton;
-        private System.Windows.Forms.Button HighPrftSrvssButton;
     }
 }

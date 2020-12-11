@@ -143,6 +143,7 @@
             this.CreateButton.TabIndex = 8;
             this.CreateButton.Text = "Create";
             this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // CnclButton
             // 
@@ -153,6 +154,7 @@
             this.CnclButton.TabIndex = 8;
             this.CnclButton.Text = "Cancel";
             this.CnclButton.UseVisualStyleBackColor = true;
+            this.CnclButton.Click += new System.EventHandler(this.CnclButton_Click);
             // 
             // createEmployeeForm
             // 

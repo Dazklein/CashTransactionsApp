@@ -59,6 +59,7 @@
             this.SignInButton.TabIndex = 2;
             this.SignInButton.Text = "Sign in";
             this.SignInButton.UseVisualStyleBackColor = true;
+            this.SignInButton.Click += new System.EventHandler(this.SignInButton_Click);
             // 
             // OpenDBManagerButton
             // 
@@ -68,6 +69,7 @@
             this.OpenDBManagerButton.TabIndex = 3;
             this.OpenDBManagerButton.Text = "DBManager";
             this.OpenDBManagerButton.UseVisualStyleBackColor = true;
+            this.OpenDBManagerButton.Click += new System.EventHandler(this.OpenDBManagerButton_Click);
             // 
             // startDialogForm
             // 

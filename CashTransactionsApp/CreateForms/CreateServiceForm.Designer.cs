@@ -88,6 +88,7 @@
             this.CnclButton.TabIndex = 4;
             this.CnclButton.Text = "Cancel";
             this.CnclButton.UseVisualStyleBackColor = true;
+            this.CnclButton.Click += new System.EventHandler(this.CnclButton_Click);
             // 
             // CreateButton
             // 
@@ -98,6 +99,7 @@
             this.CreateButton.TabIndex = 4;
             this.CreateButton.Text = "Create";
             this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // createServiceForm
             // 

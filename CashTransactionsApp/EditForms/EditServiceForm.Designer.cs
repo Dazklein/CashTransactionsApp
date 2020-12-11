@@ -46,6 +46,7 @@
             this.EditButton.TabIndex = 10;
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // CnclButton
             // 
@@ -56,6 +57,7 @@
             this.CnclButton.TabIndex = 11;
             this.CnclButton.Text = "Cancel";
             this.CnclButton.UseVisualStyleBackColor = true;
+            this.CnclButton.Click += new System.EventHandler(this.CnclButton_Click);
             // 
             // CostTextBox
             // 

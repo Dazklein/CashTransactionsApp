@@ -18,42 +18,40 @@ namespace CashTransactionsApp.Lib
         #region Access to services
         public List<Service> GetServices()
         {
-            List<Service> services = new List<Service>();
+            List<Service> result = new List<Service>();
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                services = db.Query<Service>("SELECT * FROM [Service]").ToList();
+                result = db.Query<Service>("SELECT * FROM [Service]").ToList();
             }
-            return services;
+            return result;
         }
 
         public Service GetService(int id)
         {
-            Service service = new Service();
+            Service result = new Service();
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                service = db.Query<Service>("SELECT * FROM [Service] WHERE ServiceId = @id", new { id }).FirstOrDefault();
+                result = db.Query<Service>("SELECT * FROM [Service] WHERE ServiceId = @id", new { id }).FirstOrDefault();
             }
-            return service;
+            return result;
         }
 
         public Service GetService(string name)
         {
-            Service service = new Service();
+            Service result = new Service();
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                service = db.Query<Service>("SELECT * FROM [Service] WHERE Name = @name", new { name }).FirstOrDefault();
+                result = db.Query<Service>("SELECT * FROM [Service] WHERE Name = @name", new { name }).FirstOrDefault();
             }
-            return service;
+            return result;
         }
 
-        public Service CreateService(Service service)
+        public void CreateService(Service service)
         {
             using(IDbConnection db = new SqlConnection(connectionString))
             {
-                int id = db.Query<int>("EXEC CreateService @Name, @Cost; SELECT CAST(SCOPE_IDENTITY() as Int)", service).FirstOrDefault();
-                service.ServiceId = id;
+                db.Execute("EXEC CreateService @Name, @Cost; SELECT CAST(SCOPE_IDENTITY() as Int)", service);
             }
-            return service;
         }
 
         public void EditService(Service service)
@@ -64,11 +62,11 @@ namespace CashTransactionsApp.Lib
             }
         }
 
-        public void DeleteService(Service service)
+        public void DeleteService(int serviceId)
         {
             using(IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Execute("EXEC DeleteService @ServiceId", service.ServiceId);
+                db.Execute("EXEC DeleteService @serviceId", new { serviceId });
             }
         }
         #endregion
@@ -76,42 +74,40 @@ namespace CashTransactionsApp.Lib
         #region Access to positions
         public List<Position> GetPositions()
         {
-            List<Position> positions = new List<Position>();
+            List<Position> result = new List<Position>();
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                positions = db.Query<Position>("SELECT * FROM Position").ToList();
+                result = db.Query<Position>("SELECT * FROM Position").ToList();
             }
-            return positions;
+            return result;
         }
 
         public Position GetPosition(int id)
         {
-            Position position = new Position();
+            Position result = new Position();
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                position = db.Query<Position>("SELECT * FROM [Position] WHERE PositionId = @id", new { id }).FirstOrDefault();
+                result = db.Query<Position>("SELECT * FROM [Position] WHERE PositionId = @id", new { id }).FirstOrDefault();
             }
-            return position;
+            return result;
         }
 
         public Position GetPosition(string name)
         {
-            Position position = new Position();
+            Position result = new Position();
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                position = db.Query<Position>("SELECT * FROM [Service] WHERE Name = @name", new { name }).FirstOrDefault();
+                result = db.Query<Position>("SELECT * FROM [Service] WHERE Name = @name", new { name }).FirstOrDefault();
             }
-            return position;
+            return result;
         }
 
-        public Position CreatePosition(Position position)
+        public void CreatePosition(Position position)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                int id = db.Query<int>("EXEC CreatePosition @Name; SELECT CAST(SCOPE_IDENTITY() as Int)", position).FirstOrDefault();
-                position.PositionId = id;
+                db.Execute("EXEC CreatePosition @Name; SELECT CAST(SCOPE_IDENTITY() as Int)", position);
             }
-            return position;
         }
 
         public void EditPosition(Position position)
@@ -122,11 +118,11 @@ namespace CashTransactionsApp.Lib
             }
         }
 
-        public void DeletePosition(Position position)
+        public void DeletePosition(int positionId)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Execute("EXEC DeletePosition @PositionId", position.PositionId);
+                db.Execute("EXEC DeletePosition @positionId", new { positionId });
             }
         }
         #endregion
@@ -134,42 +130,40 @@ namespace CashTransactionsApp.Lib
         #region Access to Employee
         public List<Employee> GetEmployees()
         {
-            List<Employee> employees = new List<Employee>();
+            List<Employee> result = new List<Employee>();
             using(IDbConnection db = new SqlConnection(connectionString))
             {
-                employees = db.Query<Employee>("SELECT * FROM [Employee]").ToList();
+                result = db.Query<Employee>("SELECT * FROM [Employee]").ToList();
             }
-            return employees.ToList();
+            return result;
         }
 
         public Employee GetEmployee(int id)
         {
-            Employee employee = new Employee();
+            Employee result = new Employee();
             using(IDbConnection db = new SqlConnection(connectionString))
             {
-                employee = db.Query<Employee>("SELECT * FROM [Employee] WHERE EmployeeId = @id", new { id }).FirstOrDefault();
+                result = db.Query<Employee>("SELECT * FROM [Employee] WHERE EmployeeId = @id", new { id }).FirstOrDefault();
             }
-            return employee;
+            return result;
         }
 
         public Employee GetEmployee(string surname)
         {
-            Employee employee = new Employee();
+            Employee result = new Employee();
             using(IDbConnection db = new SqlConnection(connectionString))
             {
-                employee = db.Query<Employee>("SELECT * FROM [Employee] WHERE Surname = @surname", new { surname }).FirstOrDefault();
+                result = db.Query<Employee>("SELECT * FROM [Employee] WHERE Surname = @surname", new { surname }).FirstOrDefault();
             }
-            return employee;
+            return result;
         }
 
-        public Employee CreateEmployee(Employee employee)
+        public void CreateEmployee(Employee employee)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                int id = db.Query<int>("EXEC CreateEmployee @Name, @Surname, @Phone, @Email, @PositionId", employee).FirstOrDefault();
-                employee.EmployeeId = id;
+                db.Execute("EXEC CreateEmployee @Name, @Surname, @Phone, @Email, @PositionId", employee);
             }
-            return employee;
         }
 
         public void EditEmployee(Employee employee)
@@ -180,17 +174,80 @@ namespace CashTransactionsApp.Lib
             }
         }
 
-        public void DeleteEmployee(Employee employee)
+        public void DeleteEmployee(int employeeId)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                db.Execute("EXEC DeleteEmployee @EmployeeId", employee.EmployeeId);
+                db.Execute("EXEC DeleteEmployee @employeeId", new { employeeId });
             }
         }
         #endregion
 
         #region Database operations manager
-        
+        public List<PerformedServices> GetPerformedServicesByEmployeeId(int id)
+        {
+            List<PerformedServices> result = new List<PerformedServices>();
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                result = db.Query<PerformedServices>("EXEC GetPerformedServicesById @id", new { id }).ToList();
+            }
+            return result;
+        }
+
+        public void CreateOperation(int serviceId, int employeeId)
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                db.Execute("EXEC CreateOperation @serviceId, @employeeId;", new { serviceId, employeeId });
+            }
+        }
+
+        public decimal ShowMonthSalaryByEmployeeId(int employeeId)
+        {
+            decimal result = 0;
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    result = db.Query<decimal>("EXEC ShowMonthSalaryByEmployeeId @employeeId", new { employeeId }).FirstOrDefault();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            return result;
+        }
+
+        public List<string> GetTables()
+        {
+            List<string> result = new List<string>();
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                result = db.Query<string>("EXEC GetTables").ToList();
+            }
+            return result;
+        }
+
+        public List<EmployeePerfomance> ShowEmployeePerfomance()
+        {
+            List<EmployeePerfomance> result = new List<EmployeePerfomance>();
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                result = db.Query<EmployeePerfomance>("EXEC ShowEmployeePerfomance").ToList();
+            }
+            return result;
+        }
+
+        public List<MostPopularServices> ShowMostPopularServices()
+        {
+            List<MostPopularServices> result = new List<MostPopularServices>();
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                result = db.Query<MostPopularServices>("EXEC ShowMostPopularServices").ToList();
+            }
+            return result;
+        }
         #endregion
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CashTransactionsApp.Models;
 
 namespace CashTransactionsApp.Models
 {
@@ -11,7 +12,7 @@ namespace CashTransactionsApp.Models
     {
         public int ServiceId { get; set; }
         public string Name { get; set; }
-        public int Cost { get; set; }
+        public decimal Cost { get; set; }
     }
 
     public class Position
@@ -25,13 +26,15 @@ namespace CashTransactionsApp.Models
         public int EmployeeId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string MiddleName { get; set; }
         public int PositionId { get; set; }
-        public string GetFullName
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
+        public string FullName
         {
             get
             {
-                return Surname + ' ' + Name + ' ' + MiddleName;
+                return Name + ' ' + Surname;
             }
         }
     }
@@ -42,5 +45,24 @@ namespace CashTransactionsApp.Models
         public int ServiceId { get; set; }
         public int EmployeeId { get; set; }
         public DateTime OperationDate { get; set; }
+    }
+
+    public class PerformedServices
+    {
+        public string ServiceName { get; set; }
+        public decimal ServiceCost { get; set; }
+        public DateTime OperationDate { get; set; }
+    }
+
+    public class EmployeePerfomance
+    {
+        public string EmployeeFullName { get; set; }
+        public decimal TotalEarned { get; set; }
+    }
+
+    public class MostPopularServices
+    {
+        public string ServiceName { get; set; }
+        public int CountServices { get; set; }
     }
 }

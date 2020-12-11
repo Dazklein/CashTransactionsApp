@@ -33,10 +33,12 @@
             this.SelectServiceComboBox = new System.Windows.Forms.ComboBox();
             this.AddServiceButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
+            this.srvOprtnDataGridView = new System.Windows.Forms.DataGridView();
+            this.SalaryLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.CountTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.srvOprtnDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // SignOutButton
@@ -47,6 +49,7 @@
             this.SignOutButton.TabIndex = 0;
             this.SignOutButton.Text = "Sign Out";
             this.SignOutButton.UseVisualStyleBackColor = true;
+            this.SignOutButton.Click += new System.EventHandler(this.SignOutButton_Click);
             // 
             // EmployeeFullNameLabel
             // 
@@ -77,33 +80,47 @@
             this.AddServiceButton.TabIndex = 3;
             this.AddServiceButton.Text = "Add";
             this.AddServiceButton.UseVisualStyleBackColor = true;
+            this.AddServiceButton.Click += new System.EventHandler(this.AddServiceButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 284);
+            this.label1.Location = new System.Drawing.Point(13, 428);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(220, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Your salary for the last month:";
             // 
-            // dataGridView1
+            // srvOprtnDataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 117);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(361, 150);
-            this.dataGridView1.TabIndex = 5;
+            this.srvOprtnDataGridView.AllowUserToAddRows = false;
+            this.srvOprtnDataGridView.AllowUserToDeleteRows = false;
+            this.srvOprtnDataGridView.AllowUserToResizeColumns = false;
+            this.srvOprtnDataGridView.AllowUserToResizeRows = false;
+            this.srvOprtnDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.srvOprtnDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.srvOprtnDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.srvOprtnDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.srvOprtnDataGridView.Location = new System.Drawing.Point(16, 117);
+            this.srvOprtnDataGridView.Name = "srvOprtnDataGridView";
+            this.srvOprtnDataGridView.RowHeadersVisible = false;
+            this.srvOprtnDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
+            this.srvOprtnDataGridView.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.srvOprtnDataGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.srvOprtnDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.srvOprtnDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.srvOprtnDataGridView.Size = new System.Drawing.Size(361, 295);
+            this.srvOprtnDataGridView.TabIndex = 5;
             // 
-            // label2
+            // SalaryLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(276, 284);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "..Salary..";
+            this.SalaryLabel.AutoSize = true;
+            this.SalaryLabel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.SalaryLabel.Location = new System.Drawing.Point(276, 428);
+            this.SalaryLabel.Name = "SalaryLabel";
+            this.SalaryLabel.Size = new System.Drawing.Size(69, 20);
+            this.SalaryLabel.TabIndex = 6;
+            this.SalaryLabel.Text = "..Salary..";
             // 
             // label3
             // 
@@ -114,14 +131,36 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Services you performed:";
             // 
+            // CountTextBox
+            // 
+            this.CountTextBox.Location = new System.Drawing.Point(239, 55);
+            this.CountTextBox.MaxLength = 1000;
+            this.CountTextBox.Name = "CountTextBox";
+            this.CountTextBox.Size = new System.Drawing.Size(39, 26);
+            this.CountTextBox.TabIndex = 8;
+            this.CountTextBox.Text = "1";
+            this.CountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CountTextBox_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(241, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Count";
+            // 
             // cashOperationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 322);
+            this.ClientSize = new System.Drawing.Size(389, 457);
+            this.Controls.Add(this.CountTextBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.SalaryLabel);
+            this.Controls.Add(this.srvOprtnDataGridView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AddServiceButton);
             this.Controls.Add(this.SelectServiceComboBox);
@@ -131,7 +170,9 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "cashOperationsForm";
             this.Text = "Cash Operations";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.cashOperationsForm_FormClosed);
+            this.Load += new System.EventHandler(this.cashOperationsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.srvOprtnDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,8 +185,10 @@
         private System.Windows.Forms.ComboBox SelectServiceComboBox;
         private System.Windows.Forms.Button AddServiceButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView srvOprtnDataGridView;
+        private System.Windows.Forms.Label SalaryLabel;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox CountTextBox;
+        private System.Windows.Forms.Label label4;
     }
 }

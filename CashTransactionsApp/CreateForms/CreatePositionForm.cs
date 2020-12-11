@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CashTransactionsApp.Lib;
+using CashTransactionsApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,21 @@ namespace CashTransactionsApp.CreateForms
         public createPositionForm()
         {
             InitializeComponent();
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            DataAccess db = new DataAccess();
+
+            Position position = new Position();
+            position.Name = NameTextBox.Text;
+            db.CreatePosition(position);
+            Close();
+        }
+
+        private void CnclButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

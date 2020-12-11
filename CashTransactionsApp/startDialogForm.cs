@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CashTransactionsApp.Lib;
+using CashTransactionsApp.Models;
 
 namespace CashTransactionsApp
 {
@@ -21,16 +22,38 @@ namespace CashTransactionsApp
         private void startDialogForm_Load(object sender, EventArgs e)
         {
             DataAccess db = new DataAccess();
-            foreach (var item in db.GetEmployees())
-            {
-                EmployeeComboBox.Items.Add(item);
-            }
-            
+            EmployeeComboBox.DataSource = db.GetEmployees();
+            EmployeeComboBox.DisplayMember = "FullName";
+            EmployeeComboBox.ValueMember = "EmployeeId";
         }
 
         private void startDialogForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            
+        }
+
+        private void SignInButton_Click(object sender, EventArgs e)
+        {
+            if (EmployeeComboBox.SelectedItem != null)
+            {
+                cashOperationsForm cashOperationsForm = new cashOperationsForm((Employee)EmployeeComboBox.SelectedItem);
+                cashOperationsForm.Owner = this;
+                cashOperationsForm.Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Select an employee");
+            }
+            
+        }
+
+        private void OpenDBManagerButton_Click(object sender, EventArgs e)
+        {
+            DBManagementForm dBManagementForm = new DBManagementForm();
+            dBManagementForm.Owner = this;
+            dBManagementForm.Show();
+            Hide();
         }
     }
 }

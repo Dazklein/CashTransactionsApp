@@ -52,6 +52,7 @@
             this.CnclButton.TabIndex = 22;
             this.CnclButton.Text = "Cancel";
             this.CnclButton.UseVisualStyleBackColor = true;
+            this.CnclButton.Click += new System.EventHandler(this.CnclButton_Click);
             // 
             // EditButton
             // 
@@ -62,6 +63,7 @@
             this.EditButton.TabIndex = 23;
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // label7
             // 
